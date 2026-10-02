@@ -48,7 +48,22 @@
               "raw": "{\n  \"email\": \"owner@acme.com\",\n  \"password\": \"password\"\n}"
             },
             "url": { "raw": "{{base_url}}/auth/login" }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.data && jsonData.data.token) {",
+                  "    pm.collectionVariables.set('token', jsonData.data.token);",
+                  "    console.log('Token automatically saved to collection variable!');",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
         },
         {
           "name": "Get Profile (Me)",
